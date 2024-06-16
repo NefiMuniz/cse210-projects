@@ -1,0 +1,13 @@
+Your response must:
+
+Explain the meaning of Version Control
+Highlight a benefit of Version Control
+Provide an application of Version Control. This means, provide an example of how Version Control could be used.
+Show a command used in Version Control (for example a Git command)
+Thoroughly explain these concepts (this likely cannot be done in less than 100 words)
+
+Question: What is version control and why is it important?
+
+Answer: Version Control is a system that helps to keep track of a project's history, every step will be logged with a personal footprint. This system allows the team to follow what was changed, the impacts of those changes, when changes happened and by whom. One benefit of VCS is that developers can see the entire flow of their changes, progress, issues, solutions and collaborations in the same place, it also allows you to restore your program to a previous version if needed.
+For example, in a teamwork project, you can use version control to split tasks and keep track of the due time, and how each part impacts the whole program, that way, the team can work in different tasks and time and still achieve the team's objective.
+In my opinion, "git commit -m 'message'" is one of the most important Git command in a team environment, and should be used in a wisely pattern to create a helpful history of the project, it'll make it easier to follow and measure the progress.
