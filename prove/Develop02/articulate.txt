@@ -1,0 +1,22 @@
+What is abstraction and why is it important?
+    Abstraction is a principle in computer programming that simplifies systems by hiding unnecessary details and highlighting essential features. This makes code more readable, maintainable and adaptable to changes. By dividing a program into distinct parts, abstraction helps avoid duplication and potential malfunctions.
+    Here is an example of abstraction from the journal code:
+                public class Entry
+            {
+                public string Date { get; set; }
+                public string PromptText { get; set; }
+                public string EntryText { get; set; }
+
+                public Entry(string promptText, string entryText)
+                {
+                    Date = DateTime.Now.ToString("dd/MM/yyyy HH:mm");
+                    PromptText = promptText;
+                    EntryText = entryText;
+                }
+
+                public override string ToString()
+                {
+                    return $"{Date} - Prompt: {PromptText}\n{EntryText}";
+                }
+            }
+    The "Entry" class is a good example of abstraction because it simplifies the behavior of the journal entry process, making it easier to create, store and display entries without deeper knowledge. It also allows faster changes when needed.
