@@ -1,21 +1,22 @@
+// My core was to save the journal into a csv file
 using System;
+using System.Collections.Generic;
 
-class Program
+public class Program
 {
-    static Journal journal = new Journal();
+    private static Journal journal = new Journal();
 
-    static void Main(string[] args)
+    public static void Main()
     {
-        Console.WriteLine("Welcome to the Journal Program!");
-
-        bool exit = false;
-        while (!exit)
+        while (true)
         {
-            Console.WriteLine("Menu:");
+            Console.Clear();
+            Console.WriteLine("Journal Menu");
             Console.WriteLine("1. Add an entry");
-            Console.WriteLine("2. Display");
-            Console.WriteLine("3. Save and Exit");
-            Console.WriteLine("4. Exit without saving");
+            Console.WriteLine("2. Display current session entries");
+            Console.WriteLine("3. Display from journal");
+            Console.WriteLine("4. Save and Exit");
+            Console.WriteLine("5. Exit without saving");
             Console.Write("Choose an option: ");
             string choice = Console.ReadLine();
 
@@ -25,105 +26,104 @@ class Program
                     AddEntry();
                     break;
                 case "2":
-                    DisplayEntries();
+                    DisplayCurrentSessionEntries();
                     break;
                 case "3":
-                    SaveAndExit();
-                    exit = true;
+                    DisplayFromJournal();
                     break;
                 case "4":
+                    SaveAndExit();
+                    return;
+                case "5":
                     ExitWithoutSaving();
-                    exit = true;
-                    break;
+                    return;
                 default:
-                    Console.WriteLine("Invalid choice. Please try again.");
+                    Console.WriteLine("Invalid choice. Press any key to try again.");
+                    Console.ReadKey();
                     break;
             }
         }
     }
 
-    static void AddEntry()
+    private static void AddEntry()
     {
+        // Generate a random prompt
         string prompt = Utility.GetRandomPrompt();
         Console.WriteLine($"Prompt: {prompt}");
         Console.Write("Your response: ");
         string response = Console.ReadLine();
-
+        
+        // Create a new entry and display it for confirmation
         Entry entry = new Entry(prompt, response);
+        Console.WriteLine("Your entry:");
+        Console.WriteLine(entry.ToString());
+        Console.Write("Confirm entry? (yes/edit/cancel): ");
+        string confirmation = Console.ReadLine().ToLower();
 
-        bool confirmed = false;
-        while (!confirmed)
+        switch (confirmation)
         {
-            Console.WriteLine($"\nReview your entry:\n{entry}\n");
-            Console.WriteLine("1. Confirm");
-            Console.WriteLine("2. Edit");
-            Console.WriteLine("3. Cancel");
-            Console.Write("Choose an option: ");
-            string choice = Console.ReadLine();
-
-            switch (choice)
-            {
-                case "1":
-                    journal.AddEntry(entry);
-                    confirmed = true;
-                    break;
-                case "2":
-                    Console.Write("Edit your response: ");
-                    entry.EntryText = Console.ReadLine();
-                    break;
-                case "3":
-                    confirmed = true;
-                    break;
-                default:
-                    Console.WriteLine("Invalid choice. Please try again.");
-                    break;
-            }
-        }
-    }
-
-    static void DisplayEntries()
-    {
-        Console.WriteLine("1. Display current session entries");
-        Console.WriteLine("2. Display from journal file");
-        Console.Write("Choose an option: ");
-        string choice = Console.ReadLine();
-
-        switch (choice)
-        {
-            case "1":
-                if (journal.HasEntries())
-                {
-                    journal.DisplayEntries();
-                }
-                else
-                {
-                    Console.Write("No entries in the current session, press any key to return to the menu...")
-                    Console.ReadKey();
-                }
+            case "yes":
+                journal.AddEntry(entry);
+                Console.WriteLine("Entry added.");
                 break;
-            case "2":
-                Console.Write("Enter date (dd/MM/yyyy), month (MM/yyyy), year (yyyy), or 'all': ");
-                string dateChoice = Console.ReadLine();
-                journal.LoadFromFile("journal.csv", dateChoice);
+            case "edit":
+                Console.Write("Your new response: ");
+                response = Console.ReadLine();
+                entry = new Entry(prompt, response);
+                journal.AddEntry(entry);
+                Console.WriteLine("Entry updated.");
+                break;
+            case "cancel":
+                Console.WriteLine("Entry canceled.");
                 break;
             default:
-                Console.WriteLine("Invalid choice. Please try again.");
+                Console.WriteLine("Invalid choice. Entry canceled.");
                 break;
         }
+        Console.WriteLine("Press any key to return to the menu...");
+        Console.ReadKey();
     }
 
-    static void SaveAndExit()
+    private static void DisplayCurrentSessionEntries()
     {
-        journal.SaveToFile("journal.csv");
+        var entries = journal.GetEntries();
+        if (entries.Count == 0)
+        {
+            Console.WriteLine("No entries in the current session, press any key to return to the menu...");
+            Console.ReadKey();
+            return;
+        }
+        foreach (var entry in entries)
+        {
+            Console.WriteLine(entry.ToString());
+        }
+        Console.WriteLine("Press any key to return to the menu...");
+        Console.ReadKey();
+    }
+
+    private static void DisplayFromJournal()
+    {
+        Console.Write("Enter filename to load from: ");
+        string filename = Console.ReadLine();
+        journal.LoadFromFile(filename);
+        DisplayCurrentSessionEntries();
+    }
+
+    private static void SaveAndExit()
+    {
+        Console.Write("Enter filename to save as: ");
+        string filename = Console.ReadLine();
+        journal.SaveToFile(filename);
         Console.WriteLine("Journal saved successfully. Press any key to exit.");
         Console.ReadKey();
     }
 
-    static void ExitWithoutSaving()
+    private static void ExitWithoutSaving()
     {
-        Console.WriteLine("Are you sure you want to exit without saving? All entries will be lost. Type 'confirm' to exit.");
-        string confirm = Console.ReadLine();
-        if (confirm.ToLower() == "confirm")
+        Console.WriteLine("Exiting without saving. All entries will be lost.");
+        Console.Write("Type 'confirm' to exit without saving: ");
+        string confirmation = Console.ReadLine().ToLower();
+        if (confirmation == "confirm")
         {
             Console.WriteLine("Exiting without saving. Press any key to exit.");
             Console.ReadKey();

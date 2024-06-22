@@ -1,10 +1,10 @@
-using System;
-
 public class Entry
 {
-    public string Date { get; private set; }
-    public string PromptText { get; private set; }
+    public string Date { get; set; }
+    public string PromptText { get; set; }
     public string EntryText { get; set; }
+
+    public Entry() { }
 
     public Entry(string promptText, string entryText)
     {
@@ -20,15 +20,16 @@ public class Entry
 
     public string ToCsv()
     {
-        return $"{Date.Replace(',', ';')},\"{PromptText.Replace('"', '\'')}\",\"{EntryText.Replace('"', '\'')}\"";
+        // Format entry for CSV, handling commas and quotes properly
+        return $"\"{Date}\",\"{PromptText.Replace("\"", "\"\"")}\",\"{EntryText.Replace("\"", "\"\"")}\"";
     }
 
     public static Entry FromCsv(string csvLine)
     {
-        string[] parts = csvLine.Split(new char[] { ',' }, 3);
-        string date = parts[0];
-        string prompt = parts[1].Trim('"').Replace('\'', '"');
-        string text = parts[2].Trim('"').Replace('\'', '"');
-        return new Entry(prompt, text) { Date = date };
+        var values = csvLine.Split(new[] { "\",\"" }, StringSplitOptions.None);
+        var date = values[0].Trim('\"');
+        var promptText = values[1].Trim('\"');
+        var entryText = values[2].Trim('\"');
+        return new Entry(promptText, entryText) { Date = date };
     }
 }
