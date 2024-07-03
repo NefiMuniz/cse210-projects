@@ -1,0 +1,30 @@
+What is encapsulation and why is it important?
+
+Encapsulation in computer programming refers to the process of bundling data and methods that operate on that data into single classes. This concept ensures integrity and security. Each class handles its data and methods internally, using getters and setters to interact with other parts of the program. This design keeps the program well-structured and makes it easier to modify. In our scripture memorizer program, we can ensure that words are hidden in a specific class, preventing the program from hiding the scripture reference.
+
+The Word class handles _text and _isHidden privately, preventing other parts of the program from accessing them directly:
+
+	private string _text;
+	private bool _isHidden;
+Then, using public methods:
+
+	public void Hide()
+	{
+	    _isHidden = true;
+	}
+
+	public void Show()
+	{
+	    _isHidden = false;
+	}
+
+	public bool IsHidden()
+	{
+	    return _isHidden;
+	}
+
+	public string GetDisplayText()
+	{
+	    return _isHidden ? new string('_', _text.Length) : _text;
+	}
+These public methods provide access to the data, "encapsulating" how they can be modified.
