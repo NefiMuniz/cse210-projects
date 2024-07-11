@@ -1,0 +1,86 @@
+Instructions
+Now that you have learned about the principle of inheritance, and designed and developed a program using it, return to Canvas and answer the following question (the way you would in a job interview):
+What is inheritance and why is it important?
+
+Your response must:
+Explain the meaning of Inheritance
+Highlight a benefit of Inheritance
+Provide an application of Inheritance
+Use a code example of Inheritance from the program you wrote
+
+Response:
+Inheritance, as the name suggests, is a principle that refers to the fact that some "child" can inherit characteristics from "parents." In programming, it applies when more than one "child class" needs the same method. Instead of duplicating these methods, a "parent class" holds the methods, properties, and behaviors that will be used by the children during the program. Inheritance reduces redundancy and makes the code easier to handle. In my code, I use the Activity as a base class, and it has methods that are used by the children classes, BreathingActivity, ReflectionActivity, and ListingActivity.
+// Base class Activity.cs
+public abstract class Activity
+{
+    private string _name;
+    private string _description;
+
+    public Activity(string name, string description)
+    {
+        _name = name;
+        _description = description;
+    }
+
+    public void StartActivity()
+    {
+        Console.Clear();
+        Console.WriteLine($"Starting {_name}...");
+        Console.WriteLine(_description);
+        // ...
+    }
+
+    public void EndActivity()
+    {
+        Console.WriteLine("Well done! You've completed the activity.");
+        // ...
+    }
+
+    public abstract void PerformActivity();
+}
+
+// Child class BreathingActivity.cs
+
+public class BreathingActivity : Activity
+{
+    public BreathingActivity() : base("Breathing Activity", "This activity will help you relax by walking you through breathing in and out slowly. Clear your mind and focus on your breathing.")
+    {
+    }
+
+    public override void PerformActivity()
+    {
+        StartActivity();
+        // ... breathing exercise code
+        EndActivity();
+    }
+}
+
+// Child class ReflectionActivity.cs
+public class ReflectionActivity : Activity
+{
+    public ReflectionActivity() : base("Reflection Activity", "This activity will help you reflect on times in your life when you have shown strength and resilience.")
+    {
+    }
+
+    public override void PerformActivity()
+    {
+        StartActivity();
+        // ... reflection exercise code
+        EndActivity();
+    }
+}
+
+// Child class ListingActivity.cs
+public class ListingActivity : Activity
+{
+    public ListingActivity() : base("Listing Activity", "This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.")
+    {
+    }
+
+    public override void PerformActivity()
+    {
+        StartActivity();
+        // ... listing exercise code
+        EndActivity();
+    }
+}
