@@ -1,0 +1,4 @@
+30
+SimpleGoal|Plant a tree|Plant any kind of tree in the garden|10|False
+ChecklistGoal|Attend the temple|Attend the temple at least 3 times an year|30|3|1|60|False
+EternalGoal|Daily Pray|Pray everyday in the morning and before sleep|5
