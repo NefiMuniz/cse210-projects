@@ -1,0 +1,28 @@
+Polymorphism can be named as "Inheritance 2.0". Basically, it allow a method to be used elsewhere with the ability to change it's behavior if needed through overriding.
+
+Polymorphism, which could be called "Inheritance 2.0," is a fundamental concept in object-oriented programming that allows methods to be used interchangeably while changing their behavior through overriding. It is important because it enhances code flexibility and maintainability, enabling objects of different classes to be treated as objects of a common superclass. This allows for designing more generic, reusable, and extensible code, making it easier to adapt and expand. In the goals program, polymorphism is used with the Goal class and its subclasses (SimpleGoal, EternalGoal, ChecklistGoal). Each subclass overrides the RecordEvent and GetDetails methods to provide specific behaviors, SimplesGoal only check the box with an X, EternalGoal will count the ammount of recorded events and ChecklistGoal will check if the ammount of recorded events will finish the Goal and bring the bonus or just the individual event point.
+
+Code Example:
+public abstract class Goal
+{
+    public string Name { get; set; }
+    public abstract void RecordEvent();
+    public abstract string GetDetails();
+}
+
+public class SimpleGoal : Goal
+{
+    public override void RecordEvent() { /* implementation */ }
+    public override string GetDetails() { return $"[ ] {Name}"; }
+}
+
+public class EternalGoal : Goal
+{
+    public override void RecordEvent() { /* implementation */ }
+    public override string GetDetails() { return $"{Name}"; }
+}
+
+// Usage
+Goal goal = new SimpleGoal { Name = "Read a Book" };
+goal.RecordEvent();
+Console.WriteLine(goal.GetDetails());
