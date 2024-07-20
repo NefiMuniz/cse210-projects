@@ -1,0 +1,162 @@
+Program 1: Abstraction with YouTube Videos
+Class Video
+	Track the title, author, and length of the video.
+	Store a list of comments.
+	Return the number of comments.
+GetNumberOfComments(): Returns the number of comments.		
+-------------------
++ string title
++ string author
++ int length
++ List<Comment> comments
+-------------------
++ int GetNumberOfComments()
+
+Class Comment
+	Track the name of the person who made the comment.
+	Track the text of the comment.
+-------------------
++ string name
++ string text
+
+
+
+
+Program 2: Encapsulation with Online Ordering
+Class Product
+	Track the name, product ID, price, and quantity.
+	Calculate the total cost.
+GetTotalCost(): Returns the total cost of the product.
+-------------------
++ string name
++ string productID
++ double price
++ int quantity
+-------------------
++ double GetTotalCost()
+
+Class Customer
+	Track the name and address.
+	Determine if the customer is in the USA.
+IsInUSA(): Returns whether the customer is in the USA.
+-------------------
++ string name
++ Address address
+-------------------
++ bool IsInUSA()
+
+Class Address
+	Track the street address, city, state/province, and country.
+	Determine if the address is in the USA.
+	Return the full address as a string.
+IsInUSA(): Returns whether the address is in the USA.
+GetFullAddress(): Returns the full address as a string.
+-------------------
++ string street
++ string city
++ string state
++ string country
+-------------------
++ bool IsInUSA()
++ string GetFullAddress()
+
+Class Order
+	Track a list of products and a customer.
+	Calculate the total cost of the order.
+	Return a packing label string.
+	Return a shipping label string.
+CalculateTotalCost(): Returns the total cost of the order.
+GetPackingLabel(): Returns a packing label string.
+GetShippingLabel(): Returns a shipping label string.
+-------------------
++ List<Product> products
++ Customer customer
+-------------------
++ double CalculateTotalCost()
++ string GetPackingLabel()
++ string GetShippingLabel()
+
+
+
+Program 3: Inheritance with Event Planning
+Class Event
+	Track the event title, description, date, time, and address.
+	Return standard details, full details, and a short description.
+GetStandardDetails(): Returns the standard details.
+GetFullDetails(): Returns the full details.
+GetShortDescription(): Returns the short description.
+-------------------
++ string title
++ string description
++ string date
++ string time
++ Address address
+-------------------
++ string GetStandardDetails()
++ string GetFullDetails()
++ string GetShortDescription()
+
+Class Lecture : Event
+	Track the speaker name and capacity.
+-------------------
++ string speakerName
++ int capacity
+
+Class Reception : Event
+	Track the RSVP email.
+-------------------
++ string rsvpEmail
+
+Class OutdoorGathering : Event
+	Track the weather forecast.
+-------------------
++ string weatherForecast
+
+Class Address
+	Track the street address, city, state/province, and country.
+	Return the full address as a string.
+GetFullAddress(): Returns the full address as a string.
+-------------------
++ string street
++ string city
++ string state
++ string country
+-------------------
++ string GetFullAddress()
+
+
+Program 4: Polymorphism with Exercise Tracking
+Class Activity
+	Track the date and length of the activity.
+	Calculate and return the distance, speed, and pace.
+	Return a summary string.
+GetDistance(): Returns the distance.
+GetSpeed(): Returns the speed.
+GetPace(): Returns the pace.
+GetSummary(): Returns a summary string.
+-------------------
++ string date
++ int length
+-------------------
++ virtual double GetDistance()
++ virtual double GetSpeed()
++ virtual double GetPace()
++ virtual string GetSummary()
+
+Class Running : Activity
+	Track the distance.
+Overrides GetDistance()
+-------------------
++ double distance
+
+Class Cycling : Activity
+	Track the speed.
+Overrides GetSpeed()
+-------------------
++ double speed
+
+Class Swimming : Activity
+	Track the number of laps.
+Overrides GetPace()
+-------------------
++ int numberOfLaps
